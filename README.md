@@ -20,9 +20,9 @@ Hi, my name is Jake, welcome to my homework repo. I hope you have as much fun ma
 
 ### Assignment 1:
   Three components within this repo: 
-    * "ReadMe.md", 
-    * "hw1.0_gapminder.Rmd", & 
-    * "hw1.0_presentation.Rmd".
+* "ReadMe.md", 
+* "hw1.0_gapminder.Rmd", & 
+* "hw1.0_presentation.Rmd".
 
 ### Assignment 2:
 TBD
