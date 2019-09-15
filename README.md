@@ -10,16 +10,16 @@ output:
 
 # STAT545 Assignments Repository
 
-## Repo Description:
+## Repo Description
 This repo is designed to store all *homework assignments* for the *STAT545* course.
 
-## About Me:
+## About Me
 Hi, my name is Jake, welcome to my homework repo. I hope you have as much fun marking my homework as I did creating it! :P
 
-## Contact:
-<My GitHub profile>[link](https://github.com/jacobgerlofs)
+## Contact
+<My GitHub profile>[My GitHub Profile](https://github.com/jacobgerlofs)
 
-## Assigments:
+## Assigments
 
 ### Assignment 1:
 Three components within this repo: 
