@@ -17,6 +17,8 @@ library(gapminder)
 library(DT)
 ```
 
+## Gapminder Sample Data Set
+
 ```{r gapminder table}
 datatable(as_tibble(gapminder))
 ```
