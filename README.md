@@ -17,7 +17,7 @@ This repo is designed to store all *homework assignments* for the *STAT545* cour
 Hi, my name is Jake, welcome to my homework repo. I hope you have as much fun marking my homework as I did creating it! :P
 
 ## Contact:
-<my GitHub profile>[link](https://github.com/jacobgerlofs)
+<My GitHub profile>[link](https://github.com/jacobgerlofs)
 
 ## Assigments:
 
