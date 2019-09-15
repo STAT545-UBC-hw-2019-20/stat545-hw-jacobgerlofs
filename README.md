@@ -8,10 +8,10 @@ output:
     toc: yes
 ---
 
-# **STAT545 Assignments Repository**
+# STAT545 Assignments Repository
 
 ## Repo Description:
-This repo is designed to store all homework assignments for the STAT545 course.
+This repo is designed to store all *homework assignments* for the *STAT545* course.
 
 ## About Me:
 Hi, my name is Jake, welcome to my homework repo. I hope you have as much fun marking my homework as I did creating it! :P
@@ -35,4 +35,4 @@ TBD
 
 ### Assignment 5:
 TBD
- 
+
