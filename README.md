@@ -1,15 +1,17 @@
 ---
 output:
   html_document:
-    keep_md: true
+    keep_md: yes
     theme: cerulean
-    toc: true
-    toc_float: true
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 
 # STAT545 Assignments Repository
 
-## This repo is designed to store all homework assignments for the STAT545 course.
+### This repo is designed to store all homework assignments for the STAT545 course.
 
 
 
