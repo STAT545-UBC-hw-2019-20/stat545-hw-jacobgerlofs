@@ -14,7 +14,7 @@ output:
 This repo is designed to store all *homework assignments* for the *STAT545* course.
 
 ## About Me
-Hi, my name is Jake, welcome to my homework repo. I hope you have as much fun marking my homework as I did creating it! :P
+Hi, my name is Jake, welcome to my homework repo. I hope you have as much **fun** marking my homework as I did creating it :P
 
 ## Useful Links
 [Homework Repository](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-jacobgerlofs)  
