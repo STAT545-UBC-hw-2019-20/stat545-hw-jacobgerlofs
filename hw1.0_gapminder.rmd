@@ -3,7 +3,6 @@ title: "hw1.0_gapminder"
 output:
   html_document:
     toc: yes
-    keep_md: yes
     theme: cerulean
     toc: yes
 ---
