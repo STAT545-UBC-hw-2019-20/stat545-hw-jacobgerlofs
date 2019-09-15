@@ -1,8 +1,6 @@
 ---
 title: "hw1.0_gapminder"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     toc: yes
     keep_md: yes
