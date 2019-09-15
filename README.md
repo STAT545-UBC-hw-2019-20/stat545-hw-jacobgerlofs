@@ -6,7 +6,6 @@ output:
     keep_md: yes
     theme: cerulean
     toc: yes
-    toc_float: yes
 ---
 
 # STAT545 Assignments Repository
