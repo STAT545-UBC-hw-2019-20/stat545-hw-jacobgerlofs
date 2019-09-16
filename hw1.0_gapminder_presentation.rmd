@@ -10,4 +10,3 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Gapminder Table
 
 ## Thanks for your time! :D
-  
