@@ -9,5 +9,5 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Gapminder Table
 
-## Thanks for yout time! :D
+## Thanks for your time! :D
   
