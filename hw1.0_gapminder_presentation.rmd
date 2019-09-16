@@ -1,9 +1,6 @@
 ---
 title: "hw1.0_gapminder_presentation.rmd"
 output: ioslides_presentation
-    toc: yes
-    keep_md: yes
-    theme: cerulean
 --- 
 
 ```{r setup, include=FALSE}
