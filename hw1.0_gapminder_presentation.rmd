@@ -1,13 +1,11 @@
 ---
-title: "hw1.0_gapminder_presentation.rmd"
+title: "Sample Presentation"
 output: ioslides_presentation
 --- 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
-
-## Sample presentation of data
 
 ## Gapminder Table
 
