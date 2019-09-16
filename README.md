@@ -24,7 +24,7 @@ Hi, my name is Jake, welcome to my homework repo. I hope you have as much **fun*
 
 ### Assignment 1:
 Three components within this repo: 
-* "ReadMe.md, 
+* "ReadMe.md", 
 * "hw1.0_gapminder.Rmd", & 
 * "hw1.0_presentation.Rmd"
 
