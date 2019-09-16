@@ -33,3 +33,4 @@ summary(gapminder$lifeExp)
 ```{r}
 qplot(x = year, y = lifeExp, data = gapminder, geom = "point")
 ```
+ 
