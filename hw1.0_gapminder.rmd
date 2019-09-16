@@ -1,5 +1,5 @@
 ---
-title: "hw1.0_gapminder"
+title: "Gapminder Data Exploration"
 output:
   html_document:
     toc: yes
@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tibble)
 library(gapminder)
 library(DT)
+library(ggplot2)
 ```
 
 ## Gapminder Sample Data Set
@@ -23,3 +24,12 @@ library(DT)
 datatable(as_tibble(gapminder))
 ```
 
+## Summary of Test Data
+```{r summaries}
+summary(gapminder$lifeExp)
+```
+
+## Examining Life Expectancy Across Time
+```{r}
+qplot(x = year, y = lifeExp, data = gapminder, geom = "point")
+```
