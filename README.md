@@ -27,6 +27,7 @@ Assignment 1 has three components within this repo:
 * "ReadMe.md", 
 * "hw1.0_gapminder.Rmd", & 
 * "hw1.0_presentation.Rmd"  
+
 The last two are contained within the [Hw01](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-jacobgerlofs/tree/master/Hw01) folder.
 
 ### Assignment 2:
