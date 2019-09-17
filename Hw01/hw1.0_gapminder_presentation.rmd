@@ -3,7 +3,7 @@ title: "Sample Presentation"
 output: ioslides_presentation
 --- 
 
-```{r}
+```{r activations, include = FALSE}
 
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(dplyr))
@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Gapminder Raw Data
 
 ```{r}
-datatable(as_tibble(gapminder::gapminder), extensions = "AutoFill")
+datatable(as_tibble(gapminder::gapminder), extensions = "FixedColumns")
 ```
 
 ## Life Expectency Across Time 
