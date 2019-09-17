@@ -23,13 +23,13 @@ knitr::opts_chunk$set(echo = FALSE)
 datatable(as_tibble(gapminder::gapminder), extensions = "AutoFill")
 ```
 
-## Life Expectency Across Time
+## Life Expectency Across Time 
 
 ```{r}
 ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blue", colour = "dark blue") + theme_bw() + ylab("Life Expectancy")
 ```
 
-## Let's Take a Look at Canada! | Life Expectancies
+## Let's Take a Look at Canada! | Life Expectancies {.build}
 
 ```{r}
 CanLifeExp <- gapminder %>%
@@ -39,7 +39,7 @@ CanLifeExp <- gapminder %>%
 datatable(as_tibble(CanLifeExp))
 ```
 
-## Let's Take a Look at Canada! (cont) | GDP
+## Let's Take a Look at Canada! (cont) | GDP {.build}
 
 ```{r}
 CanGDP <- gapminder %>%
@@ -49,21 +49,21 @@ CanGDP <- gapminder %>%
 datatable(as_tibble(CanGDP))
 ```
 
-## Let's Take a Look at Canada! (cont) | Canadian GDP over Time, Graphed
+## Let's Take a Look at Canada! (cont) | Canadian GDP over Time, Graphed {.build}
 
 
 ```{r}
 ggplot(CanGDP, aes(year, gdpPercap)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("GDP Per Capita") + theme_minimal() + geom_point(colour = "red")
 ```
 
-## Let's Take a Look at Canada! (cont) | Canadian Life Expectancy over Time, graphed
+## Let's Take a Look at Canada! (cont) | Canadian Life Expectancy over Time, graphed {.build}
 
 
 ```{r}
 ggplot(CanLifeExp, aes(year, lifeExp)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("Life Expectancy") + theme_minimal() + geom_point(colour = "red")
 ```
 
-## How About the Americas?
+## How About the Americas? {.build}
 
 ```{r}
 Am_lifeExp <- gapminder %>%
@@ -72,7 +72,7 @@ Am_lifeExp <- gapminder %>%
 datatable(as_tibble(Am_lifeExp))
 ```
 
-## Americas' Life Expectancies Across Time
+## Americas' Life Expectancies Across Time {.build}
 
 ```{r}
 ggplot(Am_lifeExp, aes(year, lifeExp, colour = country)) + geom_line() + ylab("Life Expectancy") + theme_minimal()
