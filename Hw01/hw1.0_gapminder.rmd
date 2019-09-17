@@ -16,10 +16,13 @@ library(tibble)
 library(gapminder)
 library(DT)
 library(ggplot2)
+
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(scales))
 ```
 
 ## Gapminder Sample Data Set
-
 ```{r gapminder table}
 datatable(as_tibble(gapminder))
 ```
@@ -31,6 +34,6 @@ summary(gapminder$lifeExp)
 
 ## Examining Life Expectancy Across Time
 ```{r}
-qplot(x = year, y = lifeExp, data = gapminder, geom = "point")
+ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blue", colour = "dark blue") + theme_bw() + ylab("Life Expectancy")
 ```
- 
+
