@@ -55,6 +55,5 @@ CanLifeExp
 ```
 ## Canadian Life Expectancy across Time
 ```{r}
-ggplot(CanLifeExp, aes(year, lifeExp)) + geom_line() + ylab("Life Expectancy") + theme_minimal()
-
+ggplot(CanLifeExp, aes(year, lifeExp)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("Life Expectancy") + theme_minimal() + geom_point(colour = "red")
 ```
