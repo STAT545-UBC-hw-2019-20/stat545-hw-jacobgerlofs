@@ -36,4 +36,4 @@ summary(gapminder$lifeExp)
 ```{r}
 ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blue", colour = "dark blue") + theme_bw() + ylab("Life Expectancy")
 ```
-
+ 

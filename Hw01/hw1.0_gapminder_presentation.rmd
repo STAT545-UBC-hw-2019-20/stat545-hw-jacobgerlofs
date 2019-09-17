@@ -9,6 +9,15 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Gapminder Table
+```{r}
+datatable(as_tibble(gapminder))
+```
+
+## Life Expectency Across Time
+```{r}
+ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blue", colour = "dark blue") + theme_bw() + ylab("Life Expectancy")
+```
+
 
 ## Thanks for your time! :D
  
