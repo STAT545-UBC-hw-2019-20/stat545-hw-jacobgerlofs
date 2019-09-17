@@ -33,24 +33,43 @@ ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blu
 ```
 ## Let's Take another Look at Canada!
 ```{r}
+CanLifeExp <- gapminder %>%
+    filter(country == 'Canada') %>%
+    group_by(year) %>%
+    summarise(lifeExp = mean(lifeExp))
+CanLifeExp
+
 CanGDP <- gapminder %>%
     filter(country == 'Canada') %>%
     group_by(year) %>%
     summarise(gdpPercap = mean(gdpPercap))
 CanGDP
 
-Can_GDP_LifeExp <- gapminder %>%
-    filter(country == 'Canada') %>%
-    group_by(gdpPercap) %>%
-    group_by(year) %>%
-    summarise(lifeExp = mean(lifeExp))
-Can_GDP_LifeExp
+## Can_GDP_LifeExp <- gapminder %>%
+##    filter(country == 'Canada') %>%
+##    group_by(gdpPercap) %>%
+##    group_by(year) %>%
+##    summarise(lifeExp = mean(lifeExp))
+## Can_GDP_LifeExp ##
 ```
+## Canadian GDP over Time
 ```{r}
 ggplot(CanGDP, aes(year, gdpPercap)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("GDP Per Capita") + theme_minimal() + geom_point(colour = "red")
 ```
+## Canadian Life Expectancy over Time
 ```{r}
-ggplot(CanLifeExp, aes(year, CanLifeExp)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("GDP Per Capita") + theme_minimal() + geom_point(colour = "red")
+ggplot(CanLifeExp, aes(year, lifeExp)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("Life Expectancy") + theme_minimal() + geom_point(colour = "red")
+```
+## How About the Americas?
+```{r}
+Am_lifeExp <- gapminder %>%
+    filter(continent == 'Americas') %>%
+    group_by(year)
+Am_lifeExp
+```
+
+```{r}
+ggplot(Am_lifeExp, aes(year, lifeExp, colour = country)) + geom_line() + ylab("Life Expectancy") + theme_minimal()
 ```
 
 
