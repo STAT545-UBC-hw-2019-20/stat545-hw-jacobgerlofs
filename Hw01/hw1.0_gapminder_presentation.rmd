@@ -28,7 +28,10 @@ datatable(tibble::as_tibble(gapminder::gapminder))
 ```{r}
 ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blue", colour = "dark blue") + theme_bw() + ylab("Life Expectancy")
 ```
-## Let's Take another Look at Canada!
+
+## Let's Take a Look at Canada!
+
+### Life Expectancies
 
 ```{r}
 CanLifeExp <- gapminder %>%
@@ -36,28 +39,31 @@ CanLifeExp <- gapminder %>%
     group_by(year) %>%
     summarise(lifeExp = mean(lifeExp))
 CanLifeExp
+```
 
+## Let's Take a Look at Canada! (cont)
+
+### GDP
+
+```{r}
 CanGDP <- gapminder %>%
     filter(country == 'Canada') %>%
     group_by(year) %>%
     summarise(gdpPercap = mean(gdpPercap))
 CanGDP
-
-## Can_GDP_LifeExp <- gapminder %>%
-##    filter(country == 'Canada') %>%
-##    group_by(gdpPercap) %>%
-##    group_by(year) %>%
-##    summarise(lifeExp = mean(lifeExp))
-## Can_GDP_LifeExp ##
 ```
 
-## Canadian GDP over Time
+## Let's Take a Look at Canada! (cont)
+
+### Canadian GDP over Time, Graphed
 
 ```{r}
 ggplot(CanGDP, aes(year, gdpPercap)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("GDP Per Capita") + theme_minimal() + geom_point(colour = "red")
 ```
 
-## Canadian Life Expectancy over Time
+## Let's Take a Look at Canada! (cont)
+
+### Canadian Life Expectancy over Time, graphed
 
 ```{r}
 ggplot(CanLifeExp, aes(year, lifeExp)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("Life Expectancy") + theme_minimal() + geom_point(colour = "red")
