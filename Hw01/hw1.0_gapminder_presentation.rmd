@@ -4,11 +4,17 @@ output: ioslides_presentation
   keep_md: yes
 --- 
 ```{r}
+library(tibble)
+library(gapminder)
+library(DT)
+library(ggplot2)
+library(dplyr)
 
+suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(gapminder))
-suppressPackageStartupMessages(library(scales))
+suppressPackageStartupMessages(library(DT))
 
 ```
 
@@ -27,9 +33,24 @@ ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blu
 ```
 ## Let's Take another Look at Canada!
 ```{r}
+CanGDP <- gapminder %>%
+    filter(country == 'Canada') %>%
+    group_by(year) %>%
+    summarise(gdpPercap = mean(gdpPercap))
+CanGDP
 
-![](https://brightcove04pmdo-a.akamaihd.net/5104226627001/5104226627001_5230047963001_5203640497001-vs.jpg?pubId=5104226627001&videoId=5203640497001)
-
+Can_GDP_LifeExp <- gapminder %>%
+    filter(country == 'Canada') %>%
+    group_by(gdpPercap) %>%
+    group_by(year) %>%
+    summarise(lifeExp = mean(lifeExp))
+Can_GDP_LifeExp
+```
+```{r}
+ggplot(CanGDP, aes(year, gdpPercap)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("GDP Per Capita") + theme_minimal() + geom_point(colour = "red")
+```
+```{r}
+ggplot(CanLifeExp, aes(year, CanLifeExp)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("GDP Per Capita") + theme_minimal() + geom_point(colour = "red")
 ```
 
 
