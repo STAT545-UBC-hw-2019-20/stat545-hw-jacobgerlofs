@@ -17,7 +17,7 @@ suppressPackageStartupMessages(library(DT))
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Gapminder Table
+## Gapminder Raw Data
 
 ```{r}
 datatable(tibble::as_tibble(gapminder::gapminder))
