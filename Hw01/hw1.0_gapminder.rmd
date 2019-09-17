@@ -36,4 +36,11 @@ summary(gapminder$lifeExp)
 ```{r}
 ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blue", colour = "dark blue") + theme_bw() + ylab("Life Expectancy")
 ```
-  
+## Highlighting Continental Outliers in Life Expectancy
+```{r}
+ggplot(gapminder, aes(x = continent, y = lifeExp)) +
+  geom_boxplot(outlier.colour = "red", outlier.alpha = 0.3) +
+  geom_jitter(position = position_jitter(width = 0.15, height = 0), alpha = 0.15)
+
+```
+
