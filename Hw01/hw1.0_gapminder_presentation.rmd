@@ -1,14 +1,9 @@
 ---
 title: "Sample Presentation"
 output: ioslides_presentation
-  keep_md: yes
 --- 
+
 ```{r}
-library(tibble)
-library(gapminder)
-library(DT)
-library(ggplot2)
-library(dplyr)
 
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(dplyr))
@@ -23,15 +18,18 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Gapminder Table
+
 ```{r}
 datatable(tibble::as_tibble(gapminder::gapminder))
 ```
 
 ## Life Expectency Across Time
+
 ```{r}
 ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blue", colour = "dark blue") + theme_bw() + ylab("Life Expectancy")
 ```
 ## Let's Take another Look at Canada!
+
 ```{r}
 CanLifeExp <- gapminder %>%
     filter(country == 'Canada') %>%
@@ -52,21 +50,29 @@ CanGDP
 ##    summarise(lifeExp = mean(lifeExp))
 ## Can_GDP_LifeExp ##
 ```
+
 ## Canadian GDP over Time
+
 ```{r}
 ggplot(CanGDP, aes(year, gdpPercap)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("GDP Per Capita") + theme_minimal() + geom_point(colour = "red")
 ```
+
 ## Canadian Life Expectancy over Time
+
 ```{r}
 ggplot(CanLifeExp, aes(year, lifeExp)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("Life Expectancy") + theme_minimal() + geom_point(colour = "red")
 ```
+
 ## How About the Americas?
+
 ```{r}
 Am_lifeExp <- gapminder %>%
     filter(continent == 'Americas') %>%
     group_by(year)
 Am_lifeExp
 ```
+
+## Americas' Life Expectancies Across Time
 
 ```{r}
 ggplot(Am_lifeExp, aes(year, lifeExp, colour = country)) + geom_line() + ylab("Life Expectancy") + theme_minimal()
