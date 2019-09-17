@@ -3,6 +3,14 @@ title: "Sample Presentation"
 output: ioslides_presentation
   keep_md: yes
 --- 
+```{r}
+
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(scales))
+
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -10,12 +18,18 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Gapminder Table
 ```{r}
-datatable(as_tibble(gapminder))
+datatable(tibble::as_tibble(gapminder::gapminder))
 ```
 
 ## Life Expectency Across Time
 ```{r}
 ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blue", colour = "dark blue") + theme_bw() + ylab("Life Expectancy")
+```
+## Let's Take another Look at Canada!
+```{r}
+
+![](https://brightcove04pmdo-a.akamaihd.net/5104226627001/5104226627001_5230047963001_5203640497001-vs.jpg?pubId=5104226627001&videoId=5203640497001)
+
 ```
 
 
