@@ -11,10 +11,6 @@ suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(DT))
 
-m = 1
-n = 5
-options(tibble.print_max = n, tibble.print_min = m)
-
 ```
 
 ```{r setup, include=FALSE}
