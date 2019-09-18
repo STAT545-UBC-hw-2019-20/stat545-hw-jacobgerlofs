@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Gapminder Raw Data
 
 ```{r}
-datatable(as_tibble(gapminder), options = list (pageLength = 5))
+datatable(as_tibble(gapminder), options = list (pageLength = 6), filter = "bottom")
 ```
 
 ## Life Expectency Across Time 
@@ -40,7 +40,7 @@ CanLifeExp <- gapminder %>%
     filter(country == 'Canada') %>%
     group_by(year) %>%
     summarise(lifeExp = mean(lifeExp))
-datatable(as_tibble(CanLifeExp))
+datatable(as_tibble(CanLifeExp), options = list (pageLength = 6, searching = FALSE))
 ```
 
 ## Let's Take a Look at Canada! (cont) | GDP {.build}
@@ -50,7 +50,7 @@ CanGDP <- gapminder %>%
     filter(country == 'Canada') %>%
     group_by(year) %>%
     summarise(gdpPercap = mean(gdpPercap))
-datatable(as_tibble(CanGDP))
+datatable(as_tibble(CanGDP), options = list (pageLength = 6, searching = FALSE))
 ```
 
 ## Let's Take a Look at Canada! (cont) | Canadian GDP over Time, Graphed {.build}
@@ -73,7 +73,7 @@ ggplot(CanLifeExp, aes(year, lifeExp)) + geom_line(linetype = "dashed", colour =
 Am_lifeExp <- gapminder %>%
     filter(continent == 'Americas') %>%
     group_by(year)
-datatable(as_tibble(Am_lifeExp))
+datatable(as_tibble(Am_lifeExp), options = list (pageLength = 6), filter = "bottom")
 ```
 
 ## Americas' Life Expectancies Across Time {.build}
