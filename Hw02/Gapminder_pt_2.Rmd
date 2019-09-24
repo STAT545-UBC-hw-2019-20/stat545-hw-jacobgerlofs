@@ -73,8 +73,8 @@ gapminder %>%
   filter(country == "Canada") %>%
   ggplot(., aes(lifeExp, gdpPercap)) +
   geom_point(color = "dark blue") + 
-  scale_y_log10("GDP per capita (US$)", labels = scales::dollar_format()) +
-  xlab("Life Expectancy (Years)") +
+  scale_y_log10("GDP per capita", labels = scales::dollar_format()) +
+  xlab("Life Expectancy") +
   theme_minimal()
 ```
 
