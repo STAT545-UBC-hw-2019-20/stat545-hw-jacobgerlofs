@@ -1,0 +1,50 @@
+---
+title: "README_Hw01"
+output: html_document
+---
+
+## Information About this folder:
+
+This folder contains documents required for the 1st STAT545 Assignment within the Assignments repo. This file outlines content contained within this homework folder as it pertains to the first assignment.
+
+### Documents contained in Hw01 folder:
+* Gapminder exercise + accompanying html version
+* Gapminder presentation exercise + accompanying html version
+
+*Note: the first README Exercise can be found outside this folder, within the [Assignments Repo](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-jacobgerlofs)*
+
+### Exercise 1: README
+
+Exercise 1 involved editing the Assignment Repo' README file using markdown features. I implimented:
+
+* Various levels of headers
+* Table of contents
+* Bold and italic fonts
+* Embedded hyperlinks
+* Bullet points
+
+### Exercise 2: Gapminder
+
+Exercise 2 involves open exploration of the Gapminder data set with the purpose of demonstrating abilities with R Markdown. I implemented a number of functions and features, such as:
+
+* Deisgn themes
+* Table generation, using DT and tibble layouts
+* Data summary functions
+* ggplot outputs
+  * geom_point plot with various design parameters
+  * boxplot with various design parameters
+  * geom_line / point combined with design parameters
+* Data filtering/subsetting
+
+### Exercise 3: Gapminder Presentation
+
+Exercise 3 involved further demonstration of understanding markdown via data exploration. Here I implemented various features, some of them the same as in Exercise 2 and some different:
+
+* Various levels of headers
+* Presentation style elements, such as {.build}
+* Table generation using DT and Tibble, along with additional dessign parameters to fit within the slide
+* ggplot outputs
+  * geom_point plot with various design parameters
+  * Geom_point / geom_line combined with design parameters
+  * stacked line graph with design parameters
+* Data filtering/subsetting
