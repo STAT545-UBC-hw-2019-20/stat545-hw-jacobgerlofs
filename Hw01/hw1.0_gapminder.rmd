@@ -16,10 +16,15 @@ library(tibble)
 library(gapminder)
 library(DT)
 library(ggplot2)
+library(dplyr)
+
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(scales))
 ```
 
 ## Gapminder Sample Data Set
-
 ```{r gapminder table}
 datatable(as_tibble(gapminder))
 ```
@@ -31,10 +36,37 @@ summary(gapminder$lifeExp)
 
 ## Examining Life Expectancy Across Time
 ```{r}
-qplot(x = year, y = lifeExp, data = gapminder, geom = "point")
+ggplot(gapminder, aes(year, lifeExp)) + geom_point(alpha = 0.1, fill = "dark blue", colour = "dark blue") + theme_bw() + ylab("Life Expectancy")
 ```
+
+## Highlighting Continental Outliers in Life Expectancy
+
+```{r}
+ggplot(gapminder, aes(x = continent, y = lifeExp)) +
+  geom_boxplot(outlier.colour = "red", outlier.alpha = 0.3) + ylab ("Life Expectancy") + xlab("Continent") +
+  geom_jitter(position = position_jitter(width = 0.15, height = 0), alpha = 0.15)
+
+```
+
+## Let's Take a Look at Canada
+
+```{r}
+CanLifeExp <- gapminder %>%
+    filter(country == 'Canada') %>%
+    group_by(year) %>%
+    summarise(lifeExp = mean(lifeExp))
+CanLifeExp
+```
+<<<<<<< HEAD
  
 <<<<<<< HEAD:hw1.0_gapminder.rmd
  
 =======
 >>>>>>> 4242ff0b7f869c190e9fc83cf903659fdfad01f7:Hw01/hw1.0_gapminder.rmd
+=======
+## Canadian Life Expectancy across Time
+```{r}
+ggplot(CanLifeExp, aes(year, lifeExp)) + geom_line(linetype = "dashed", colour = "dark grey") + ylab("Life Expectancy") + theme_minimal() + geom_point(colour = "red")
+```
+
+>>>>>>> 664b683c236a5f6e3160ae7bb41137552f9ffa64
