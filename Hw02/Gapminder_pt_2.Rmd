@@ -1,5 +1,136 @@
+
 ---
 title: "Gapminder_pt_2"
-output: html_document
+output: 
+  html_document:
+    keep_md: true 
+    theme: cerulean
+    toc: true
 ---
+
+# STAT545 Assignment 2: Gapminder Further Exploration
+
+```{r, warning=FALSE, echo=FALSE, message=FALSE}
+library(gapminder)
+library(tidyverse)
+library(scales)
+library(tsibble)
+library(DT)
+library(knitr)
+library(kableExtra)
+```
+
+##Exercise 1: Basic dplyr
+
+### 1.1 - Select Countries in 1970s
+
+#### Canada, France, and New Zealand
+
+```{r}
+selectgapminder <- gapminder %>%
+ filter(year >= 1970 & year <= 1979, 
+   country == "Canada" | country == "France" | country == "New Zealand")
+datatable(selectgapminder)
+```
+
+### 1.2 - Select Countries and GDP Per Capita
+
+
+```{r}
+selectgapminder <- gapminder %>%
+  filter(year >= 1970 & year <= 1979, 
+  country == "Canada" | country == "France" | country == "New Zealand") %>%
+  select (country, gdpPercap)
+datatable(selectgapminder)
+```
+
+### 1.3 - Changes in Life Expectancy
+
+```{r}
+selectgapminder <- gapminder %>%
+  group_by(country)%>%
+  arrange(year)%>%
+  mutate(IncreaseInLifeExp = difference(lifeExp)) %>%
+  arrange(IncreaseInLifeExp) %>%
+  filter(IncreaseInLifeExp < 0)
+datatable(selectgapminder)
+```
+
+### 1.4 - Each Country's Max GDP Per Capita
+
+```{r}
+selectdatatable <- gapminder %>% 
+  group_by(country) %>%
+  summarize(maxGdpPercap = max(gdpPercap))
+datatable(selectgapminder)
+```
+
+
+### 1.5 - Canadian Life Expectancies compared to GDP Per Capita
+
+```{r}
+gapminder %>%
+  filter(country == "Canada") %>%
+  ggplot(., aes(lifeExp, gdpPercap)) +
+  geom_point(color = "dark blue") + 
+  scale_y_log10("GDP per capita (US$)", labels = scales::dollar_format()) +
+  xlab("Life Expectancy (Years)") +
+  theme_minimal()
+```
+
+## Exercise 2: Explore Individual Variables with dplyr
+
+```{r}
+selectgapminder <- gapminder %>%
+  group_by(country) %>%
+  summarize(min_pop = min(pop), max_pop = max(pop), mean_pop = mean(pop), 
+            median_pop= median(pop), sd_pop = sd(pop))
+datatable(selectgapminder)
+```
+
+## Exercise 2: Explore Individual Variables with dplyr (cont.)
+
+```{r}
+gapminder %>%
+  group_by(continent, country) %>%
+  summarize(meanpop = mean(pop) / 1000000) %>%
+  ggplot(., aes(continent, meanpop)) +
+  geom_col(fill = "light blue") +
+  ylab("Mean Population (millions)") +
+  xlab("Continent") +
+  theme_minimal()
+```
+
+## Exercise 2: Explore individual variables with dplyr (cont.)
+
+```{r}
+selectgapminder <- gapminder %>%
+  group_by(continent, country) %>%
+  summarize(n_countries = n_distinct(country)) %>%
+  tally(n_countries)
+datatable(selectgapminder)
+```
+
+
+## Exercise 3: Exploring Various Plot Types
+
+### Summary of iris data before jumping into plots
+
+```{r}
+library(datasets)
+datatable(iris)
+```
+
+### Plot 1: Exploring petal width and petal length
+
+#### This allows us to see, generally, which species are producing petals with the largest surface area
+
+```{r}
+iris %>%
+  ggplot() +
+  geom_point (aes(Petal.Width, Petal.Length, color=Species)) +
+  xlab("Pedal Width") +
+  ylab("Petal Length") +
+  theme_minimal()
+```
 
