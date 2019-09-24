@@ -143,3 +143,19 @@ iris %>%
   ggplot() +aes(Species, iris$Sepal.Width*iris$Sepal.Length, fill = Species) + geom_boxplot() + ylab("Sepal Surface Area") + scale_fill_brewer(palette="RdBu") + theme_minimal()
 ```
 
+## Recycling Bonus Exercise
+
+## Recycling
+
+#### The code is incorrect, instead of separately evaluating each country the code takes a little of both, resulting in the following 12 row table instead of 24:
+```{r}
+newgap <- filter(gapminder, country == c("Rwanda", "Afghanistan"))
+datatable(newgap)
+```
+ 
+#### By separating the filter by 'or' statements, we get a table with all data points for all years for the 2 countries.
+
+```{r}
+newgap <- filter(gapminder, country == "Rwanda" | country == "Afghanistan")
+datatable(newgap)
+```
