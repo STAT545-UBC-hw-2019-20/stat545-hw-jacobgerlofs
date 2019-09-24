@@ -34,4 +34,7 @@ summary(gapminder$lifeExp)
 qplot(x = year, y = lifeExp, data = gapminder, geom = "point")
 ```
  
+<<<<<<< HEAD:hw1.0_gapminder.rmd
  
+=======
+>>>>>>> 4242ff0b7f869c190e9fc83cf903659fdfad01f7:Hw01/hw1.0_gapminder.rmd
