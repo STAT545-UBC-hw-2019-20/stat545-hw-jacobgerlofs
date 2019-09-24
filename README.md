@@ -32,7 +32,10 @@ Hi, my name is Jake, welcome to my homework repo. I hope you have as much **fun*
 The last two are contained within the [Hw01](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-jacobgerlofs/tree/master/Hw01) folder.
 
 ### Assignment 2:
-TBD
+
+#### Assignment 2 has only one file, found within the [Hw02](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-jacobgerlofs/tree/master/Hw02) folder
+
+* "gapminder_pt_2.rmd"
 
 ### Assignment 3:
 TBD
