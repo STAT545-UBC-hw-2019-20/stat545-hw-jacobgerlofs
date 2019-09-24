@@ -134,3 +134,12 @@ iris %>%
   theme_minimal()
 ```
 
+### Plot 2: Exploring Sepal Surface Area of the Three Species
+
+#### Here we examine surface areas more directly between surface areas, this time exmaming sepal instead of petal. Of course, the surface area equations used in this example are for rectangles, and is therefore a crude approach that gives relative values.
+
+```{r}
+iris %>%
+  ggplot() +aes(Species, iris$Sepal.Width*iris$Sepal.Length, fill = Species) + geom_boxplot() + ylab("Sepal Surface Area") + scale_fill_brewer(palette="RdBu") + theme_minimal()
+```
+
