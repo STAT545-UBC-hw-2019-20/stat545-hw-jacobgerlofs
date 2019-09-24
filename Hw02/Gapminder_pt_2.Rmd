@@ -30,7 +30,7 @@ library(kableExtra)
 selectgapminder <- gapminder %>%
  filter(year >= 1970 & year <= 1979, 
    country == "Canada" | country == "France" | country == "New Zealand")
-datatable(selectgapminder)
+kable(selectgapminder)
 ```
 
 ### 1.2 - Select Countries and GDP Per Capita
@@ -41,7 +41,7 @@ selectgapminder <- gapminder %>%
   filter(year >= 1970 & year <= 1979, 
   country == "Canada" | country == "France" | country == "New Zealand") %>%
   select (country, gdpPercap)
-datatable(selectgapminder)
+kable(selectgapminder)
 ```
 
 ### 1.3 - Changes in Life Expectancy
@@ -108,7 +108,7 @@ selectgapminder <- gapminder %>%
   group_by(continent, country) %>%
   summarize(n_countries = n_distinct(country)) %>%
   tally(n_countries)
-datatable(selectgapminder)
+kable(selectgapminder)
 ```
 
 
