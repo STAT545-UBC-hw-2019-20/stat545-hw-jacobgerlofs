@@ -7,3 +7,5 @@ output:
   theme: cerulean
 ---
 
+# STAT545 Assignment 3: Exploring Data with dplyr and ggplot pt. II
+
