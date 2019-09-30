@@ -7,7 +7,7 @@ output:
     theme: united
 ---
 
-```{r setup, include = FALSE}
+```{r, setup}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
