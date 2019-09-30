@@ -9,3 +9,14 @@ output:
 
 # STAT545 Assignment 3: Exploring Data with dplyr and ggplot pt. II
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, warning = FASLE, echo = FALSE}
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(scales))
+```
+
