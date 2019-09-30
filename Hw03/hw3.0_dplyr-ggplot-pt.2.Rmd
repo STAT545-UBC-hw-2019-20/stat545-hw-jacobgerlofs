@@ -1,19 +1,19 @@
 ---
 title: "hw3.0_dplyr-ggplot-pt.2"
 output:
-  html_document: yes
-  toc: yes
-  kep_md: yes
-  theme: cerulean
+  html_document:
+    toc: yes
+    keep_md: yes
+    theme: cerulean
 ---
 
 # STAT545 Assignment 3: Exploring Data with dplyr and ggplot pt. II
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, warning = FASLE, echo = FALSE}
+```{r, warning = FALSE, echo = FALSE}
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(gapminder))
