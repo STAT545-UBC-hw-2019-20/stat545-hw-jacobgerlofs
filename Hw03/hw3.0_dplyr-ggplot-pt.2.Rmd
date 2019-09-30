@@ -18,3 +18,33 @@ suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(scales))
 ```
 
+# Task X - blah: 
+
+## X.1 - Tibble: 
+
+## X.2 - Plot:
+
+## X.3 - Discussion:
+
+------
+
+# Task X - blah: 
+
+## X.1 - Tibble: 
+
+## X.2 - Plot:
+
+## X.3 - Discussion:
+
+------
+
+# Task X - blah: 
+
+## X.1 - Tibble: 
+
+## X.2 - Plot:
+
+## X.3 - Discussion:
+
+------
+
