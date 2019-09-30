@@ -1,10 +1,10 @@
 ---
-title: "hw3.0_dplyr-ggplot-pt.2"
+title: "STAT545 Assignment 3: Exploring Data with dplyr and ggplot pt. II"
 output:
   html_document:
     toc: yes
     keep_md: yes
-    theme: cerulean
+    theme: united
 ---
 
 # STAT545 Assignment 3: Exploring Data with dplyr and ggplot pt. II
