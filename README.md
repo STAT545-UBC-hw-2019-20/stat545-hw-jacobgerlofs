@@ -38,7 +38,11 @@ The last two are contained within the [Hw01](https://github.com/STAT545-UBC-hw-2
 * "gapminder_pt_2.rmd"
 
 ### Assignment 3:
-TBD
+
+#### Assignment 3 has two files found within the [Hw03 folder](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-jacobgerlofs/tree/master/Hw03)
+
+* README (for local folder navigation)
+* "dplyr-ggplot-pt.2"
 
 ### Assignment 4:
 TBD
