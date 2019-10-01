@@ -18,14 +18,12 @@ suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(scales))
 ```
 
-# Task X - blah: 
+# Task 1 - Low Life Expectancies within Continents over time: 
 
 ```{r}
 gapminder
 ```
 
-
-## X.1 - Tibble: 
 
 ### Defining 'Low Life Expectancy'
 
@@ -45,44 +43,33 @@ gapminder %>%
 
 #### Average life expactancy appears to be about 61.5 years in the year 1982. Low life expectancy can be defined as any life expectancy one standard deviation below the mean, representing the lower 32% of the population. As a absolute value, this is 50.7 years.
 
-### Creating Tibble
-
-```{r}
-gapminder %>% 
-  group_by(smallLifeExp = lifeExp < 50.7) %>% 
-  arrange(desc(smallLifeExp))
-```
+## 1.1 - Tibble: 
 
 ```{r}
 gapminder %>% 
   mutate(smallLifeExp = lifeExp < 50.7) %>% 
-  group_by(continent, year)
+  group_by(continent, year) %>% 
+  tally(smallLifeExp)
+```
+
+## 1.2 - Plot:
+
+```{r}
+gapminder %>% 
+  mutate(smallLifeExp = lifeExp < 50.7) %>% 
+  group_by(continent, year) %>% 
+  tally(smallLifeExp) %>% 
+  ggplot(aes(year, n, group = continent, colour = continent)) +
+    geom_point() + 
+    geom_line() +
+    theme_minimal() +
+    ylab("Number of Countries with Low Life Expectancies")
 ```
 
 
+## 1.3 - Discussion:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## X.2 - Plot:
-
-## X.3 - Discussion:
+#### Looking at the plot, we can see that the number of countries within each continent with a "low life expectancy", as defined by average life expectancies below 50.7 years, decreases over time. This cannot be said for the Oceania region, as life expectancies are above 50.7 between 1952 and 2007. All countries within Europe and the Americas have a life expectancy above 50.7 by the 1980s, Asia only missing this statistic by a few countries. Africa continues to have coutries with low life expectancies, although the number of countries has been steadily declining.
 
 ------
 
