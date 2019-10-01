@@ -373,6 +373,12 @@ summary {
 
 <div id="TOC">
 <ul>
+<li><a href="#task-1---low-life-expectancies-within-continents-over-time">Task 1 - Low Life Expectancies within Continents over time:</a><ul>
+<li><a href="#defining-low-life-expectancy">Defining ‘Low Life Expectancy’</a></li>
+<li><a href="#tibble">1.1 - Tibble:</a></li>
+<li><a href="#plot">1.2 - Plot:</a></li>
+<li><a href="#discussion">1.3 - Discussion:</a></li>
+</ul></li>
 <li><a href="#task-x---blah">Task X - blah:</a><ul>
 <li><a href="#x.1---tibble">X.1 - Tibble:</a></li>
 <li><a href="#x.2---plot">X.2 - Plot:</a></li>
@@ -383,15 +389,89 @@ summary {
 <li><a href="#x.2---plot-1">X.2 - Plot:</a></li>
 <li><a href="#x.3---discussion-1">X.3 - Discussion:</a></li>
 </ul></li>
-<li><a href="#task-x---blah-2">Task X - blah:</a><ul>
-<li><a href="#x.1---tibble-2">X.1 - Tibble:</a></li>
-<li><a href="#x.2---plot-2">X.2 - Plot:</a></li>
-<li><a href="#x.3---discussion-2">X.3 - Discussion:</a></li>
-</ul></li>
 </ul>
 </div>
 
 <pre class="r"><code>knitr::opts_chunk$set(echo = TRUE)</code></pre>
+<div id="task-1---low-life-expectancies-within-continents-over-time" class="section level1">
+<h1>Task 1 - Low Life Expectancies within Continents over time:</h1>
+<pre class="r"><code>gapminder</code></pre>
+<pre><code>## # A tibble: 1,704 x 6
+##    country     continent  year lifeExp      pop gdpPercap
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+##  1 Afghanistan Asia       1952    28.8  8425333      779.
+##  2 Afghanistan Asia       1957    30.3  9240934      821.
+##  3 Afghanistan Asia       1962    32.0 10267083      853.
+##  4 Afghanistan Asia       1967    34.0 11537966      836.
+##  5 Afghanistan Asia       1972    36.1 13079460      740.
+##  6 Afghanistan Asia       1977    38.4 14880372      786.
+##  7 Afghanistan Asia       1982    39.9 12881816      978.
+##  8 Afghanistan Asia       1987    40.8 13867957      852.
+##  9 Afghanistan Asia       1992    41.7 16317921      649.
+## 10 Afghanistan Asia       1997    41.8 22227415      635.
+## # ... with 1,694 more rows</code></pre>
+<div id="defining-low-life-expectancy" class="section level3">
+<h3>Defining ‘Low Life Expectancy’</h3>
+<div id="to-establish-thresholds-for-low-and-high-life-expectancy-lets-summarise-life-expectancies-of-the-global-population.-lifeexp-is-related-to-year-therefore-it-may-be-misleading-to-ignore-the-year-in-obtaining-these-values-to-set-our-threshold.-using-most-recent-year-for-example-will-yield-the-highest-possible-values.-to-compensate-we-will-examine-life-expactancy-around-the-median-year-in-the-data-set." class="section level4">
+<h4>To establish thresholds for low and high life expectancy, lets summarise life expectancies of the global population. LifeExp is related to year, therefore it may be misleading to ignore the year in obtaining these values to set our threshold. Using most recent year, for example, will yield the highest possible values. To compensate, we will examine life expactancy around the median year in the data set.</h4>
+<pre class="r"><code>median(gapminder$year)</code></pre>
+<pre><code>## [1] 1979.5</code></pre>
+<pre class="r"><code>gapminder %&gt;% 
+  filter(year == &quot;1982&quot;) %&gt;% 
+  summarise(mu = mean(lifeExp),
+            sigma = sd(lifeExp)) </code></pre>
+<pre><code>## # A tibble: 1 x 2
+##      mu sigma
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  61.5  10.8</code></pre>
+</div>
+<div id="average-life-expactancy-appears-to-be-about-61.5-years-in-the-year-1982.-low-life-expectancy-can-be-defined-as-any-life-expectancy-one-standard-deviation-below-the-mean-representing-the-lower-32-of-the-population.-as-a-absolute-value-this-is-50.7-years." class="section level4">
+<h4>Average life expactancy appears to be about 61.5 years in the year 1982. Low life expectancy can be defined as any life expectancy one standard deviation below the mean, representing the lower 32% of the population. As a absolute value, this is 50.7 years.</h4>
+</div>
+</div>
+<div id="tibble" class="section level2">
+<h2>1.1 - Tibble:</h2>
+<pre class="r"><code>gapminder %&gt;% 
+  mutate(smallLifeExp = lifeExp &lt; 50.7) %&gt;% 
+  group_by(continent, year) %&gt;% 
+  tally(smallLifeExp)</code></pre>
+<pre><code>## # A tibble: 60 x 3
+## # Groups:   continent [5]
+##    continent  year     n
+##    &lt;fct&gt;     &lt;int&gt; &lt;int&gt;
+##  1 Africa     1952    50
+##  2 Africa     1957    50
+##  3 Africa     1962    47
+##  4 Africa     1967    42
+##  5 Africa     1972    37
+##  6 Africa     1977    29
+##  7 Africa     1982    26
+##  8 Africa     1987    22
+##  9 Africa     1992    22
+## 10 Africa     1997    21
+## # ... with 50 more rows</code></pre>
+</div>
+<div id="plot" class="section level2">
+<h2>1.2 - Plot:</h2>
+<pre class="r"><code>gapminder %&gt;% 
+  mutate(smallLifeExp = lifeExp &lt; 50.7) %&gt;% 
+  group_by(continent, year) %&gt;% 
+  tally(smallLifeExp) %&gt;% 
+  ggplot(aes(year, n, group = continent, colour = continent)) +
+    geom_point() + 
+    geom_line() +
+    theme_minimal() +
+    ylab(&quot;Number of Countries with Low Life Expectancies&quot;)</code></pre>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="discussion" class="section level2">
+<h2>1.3 - Discussion:</h2>
+<div id="looking-at-the-plot-we-can-see-that-the-number-of-countries-within-each-continent-with-a-low-life-expectancy-as-defined-by-average-life-expectancies-below-50.7-years-decreases-over-time.-this-cannot-be-said-for-the-oceania-region-as-life-expectancies-are-above-50.7-between-1952-and-2007.-all-countries-within-europe-and-the-americas-have-a-life-expectancy-above-50.7-by-the-1980s-asia-only-missing-this-statistic-by-a-few-countries.-africa-continues-to-have-coutries-with-low-life-expectancies-although-the-number-of-countries-has-been-steadily-declining." class="section level4">
+<h4>Looking at the plot, we can see that the number of countries within each continent with a “low life expectancy”, as defined by average life expectancies below 50.7 years, decreases over time. This cannot be said for the Oceania region, as life expectancies are above 50.7 between 1952 and 2007. All countries within Europe and the Americas have a life expectancy above 50.7 by the 1980s, Asia only missing this statistic by a few countries. Africa continues to have coutries with low life expectancies, although the number of countries has been steadily declining.</h4>
+<hr />
+</div>
+</div>
+</div>
 <div id="task-x---blah" class="section level1">
 <h1>Task X - blah:</h1>
 <div id="x.1---tibble" class="section level2">
@@ -414,19 +494,6 @@ summary {
 <h2>X.2 - Plot:</h2>
 </div>
 <div id="x.3---discussion-1" class="section level2">
-<h2>X.3 - Discussion:</h2>
-<hr />
-</div>
-</div>
-<div id="task-x---blah-2" class="section level1">
-<h1>Task X - blah:</h1>
-<div id="x.1---tibble-2" class="section level2">
-<h2>X.1 - Tibble:</h2>
-</div>
-<div id="x.2---plot-2" class="section level2">
-<h2>X.2 - Plot:</h2>
-</div>
-<div id="x.3---discussion-2" class="section level2">
 <h2>X.3 - Discussion:</h2>
 <hr />
 </div>
