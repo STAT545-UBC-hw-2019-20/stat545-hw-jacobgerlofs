@@ -29,7 +29,7 @@ gapminder
 
 ### Defining 'Low Life Expectancy'
 
-#### To establish thresholds for low and high life expectancy, lets summarise life expectancies of the global population. It may be misleading to ignore the year in obtaining these values to set our threshold. Using the most recent year will also yield the highest possible values. To compensate, we will examine life expactancy around the median year in the data set.
+#### To establish thresholds for low and high life expectancy, lets summarise life expectancies of the global population. LifeExp is related to year, therefore it may be misleading to ignore the year in obtaining these values to set our threshold. Using most recent year, for example, will yield the highest possible values. To compensate, we will examine life expactancy around the median year in the data set.
 
 ```{r}
 median(gapminder$year)
@@ -53,7 +53,16 @@ gapminder %>%
   arrange(desc(smallLifeExp))
 ```
 
+```{r}
+gapminder %>% 
+  mutate(smallLifeExp = lifeExp < 50.7) %>% 
+  select(year, country, continent, lifeExp, smallLifeExp) %>% 
+  filter(smallLifeExp == 1)
+```
 
+```{r}
+
+```
 
 
 
