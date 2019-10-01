@@ -57,11 +57,8 @@ gapminder %>%
 gapminder %>% 
   mutate(smallLifeExp = lifeExp < 50.7) %>% 
   select(year, country, continent, lifeExp, smallLifeExp) %>% 
-  filter(smallLifeExp == 1)
-```
-
-```{r}
-
+  filter(smallLifeExp == 1) %>% 
+  count(continent, year,)
 ```
 
 
