@@ -20,11 +20,25 @@ suppressPackageStartupMessages(library(scales))
 
 # Task X - blah: 
 
+```{r}
+gapminder
+```
+
+
 ## X.1 - Tibble: 
 
-```{r}
+### Defining 'Low Life Expectancy'
 
+#### To establish thresholds for low and high life expectancy, lets summarise life expectancies of the global population
+```{r}
+gapminder %>% 
+  summarise(mu = mean(lifeExp),
+            sigma = sd(lifeExp)) 
 ```
+#### Average life expactancy appears to be about 59.5 years. Low life expectancy can be defined as any life expectancy one standard deviation below the mean, representing the lower 32% of the population. As a absolute value, this is 46.5 years.
+
+### Creating Tibble
+
 
 
 ## X.2 - Plot:
