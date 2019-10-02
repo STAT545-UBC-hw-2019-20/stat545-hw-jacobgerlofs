@@ -16,6 +16,7 @@ suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(scales))
+suppressPackageStartupMessages(library(tsibble))
 ```
 
 # Task 1 - Low Life Expectancies within Continents over time: 
@@ -125,19 +126,40 @@ gapminder %>%
 
 #### Some details of this graph was rather finicky, among some common sites, I stumbled upon (Data Nova)[https://www.datanovia.com/en/], which was a helpful resource for some formatting details.
 
-## X.3 - Discussion:
+## 2.3 - Discussion: Max and Min GDP from each Continent
 
 #### Given that the max and min continent gdp values were obtained from a singular country from any given year, and these details are not included in this analysis, the results are not particularily valuable. We see that each continent has a country with a very low min gdp, which was likely found around 1952 given the positive relationship between GDP and time. Each continent also has a country with quite a high max GDP as well. The spread in the data is therefore quite large, even making a regular-scale graphed difficult to read and comapare max to min GDPs.
 
 ------
 
-# Task X - blah: 
+# Task 5 - Changes in Life Expectancy in Different Continents: 
 
-## X.1 - Tibble: 
+## 5.1 - Tibble: Changes in Life Expectancy over time, for each continent
 
-## X.2 - Plot:
+```{r}
+gapminder %>% 
+  mutate(inc_life_exp = difference(lifeExp)) %>%
+  drop_na() %>% 
+  group_by(year, continent) %>% 
+  summarise(mean_inc_life_exp = mean(inc_life_exp))
+```
 
-## X.3 - Discussion:
+
+## 5.2 - Plot:
+
+```{r}
+gapminder %>% 
+  mutate(inc_life_exp = difference(lifeExp)) %>%
+  drop_na() %>% 
+  group_by(year, continent) %>% 
+  summarise(mean_inc_life_exp = mean(inc_life_exp)) %>% 
+  ggplot(aes(year, mean_inc_life_exp, colour = continent)) +
+  geom_point(alpha = .6) +
+  geom_line(alpha = .6) +
+  theme_minimal()
+```
+
+## 5.3 - Discussion:
 
 ------
 
