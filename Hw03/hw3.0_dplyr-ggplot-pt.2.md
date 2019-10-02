@@ -35,7 +35,7 @@ gapminder
 ##  8 Afghanistan Asia       1987    40.8 13867957      852.
 ##  9 Afghanistan Asia       1992    41.7 16317921      649.
 ## 10 Afghanistan Asia       1997    41.8 22227415      635.
-## # ... with 1,694 more rows
+## # … with 1,694 more rows
 ```
 
 
@@ -70,7 +70,7 @@ gapminder %>%
 
 #### Average life expactancy appears to be about 61.5 years in the year 1982. Low life expectancy can be defined as any life expectancy one standard deviation below the mean, representing the lower 32% of the population. As a absolute value, this is 50.7 years.
 
-## 1.1 - Tibble: 
+## 1.1 - Tibble: Number of Countries with Low Life Expectancy per Continent over Time
 
 
 ```r
@@ -95,10 +95,10 @@ gapminder %>%
 ##  8 Africa     1987    22
 ##  9 Africa     1992    22
 ## 10 Africa     1997    21
-## # ... with 50 more rows
+## # … with 50 more rows
 ```
 
-## 1.2 - Plot:
+## 1.2 - Plot: Number of Countries with Low Life Expectancy per Continent over Time
 
 
 ```r
@@ -116,17 +116,96 @@ gapminder %>%
 ![](hw3.0_dplyr-ggplot-pt.2_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 
-## 1.3 - Discussion:
+## 1.3 - Discussion: Declining Countries with Low Life Expectancies over Time
 
 #### Looking at the plot, we can see that the number of countries within each continent with a "low life expectancy", as defined by average life expectancies below 50.7 years, decreases over time. This cannot be said for the Oceania region, as life expectancies are above 50.7 between 1952 and 2007. All countries within Europe and the Americas have a life expectancy above 50.7 by the 1980s, Asia only missing this statistic by a few countries. Africa continues to have coutries with low life expectancies, although the number of countries has been steadily declining.
 
 ------
 
-# Task X - blah: 
+# Task 2 - Min & Max GDP Per Capita for each Continent: 
 
-## X.1 - Tibble: 
+## 2.1 - Tibble: Each Continent's Minimum and Maximum GDP Per Capita, irrelevent of time
 
-## X.2 - Plot:
+
+```r
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(max_gdp = max(gdpPercap),
+            min_gdp = min(gdpPercap))
+```
+
+```
+## # A tibble: 5 x 3
+##   continent max_gdp min_gdp
+##   <fct>       <dbl>   <dbl>
+## 1 Africa     21951.    241.
+## 2 Americas   42952.   1202.
+## 3 Asia      113523.    331 
+## 4 Europe     49357.    974.
+## 5 Oceania    34435.  10040.
+```
+
+## 2.2 - Plot: Each Continent's Minimum and Maximum GDP Per Capita, irrelevent of time
+
+### From the way the data is organized in 2.1, it seemed quite difficult to create a tacked bar graph - either that, or I didn't know how, despite research. In order to effectively create the stacked bar graph I wanted to make, I had to pivot the data first
+
+
+```r
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(max_gdp = max(gdpPercap),
+            min_gdp = min(gdpPercap)) %>% 
+  pivot_longer(cols = c(max_gdp, min_gdp),
+               names_to = "min_or_max",
+               values_to = "GDPPerCapita") %>% 
+  ggplot(aes(x = continent, y = GDPPerCapita, fill = min_or_max)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  theme(legend.title = element_blank())+
+  scale_fill_discrete(labels = c("Maximum GDP Value", "Minimum GDP Value")) +
+  scale_y_continuous("GDP per capita", labels = scales::dollar_format())
+```
+
+![](hw3.0_dplyr-ggplot-pt.2_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+
+### It's quite difficult to see the Min GDP values given the graph scale, so I've changed the scale into log base 10.
+
+
+```r
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(max_gdp = max(gdpPercap),
+            min_gdp = min(gdpPercap)) %>% 
+  pivot_longer(cols = c(max_gdp, min_gdp),
+               names_to = "min_or_max",
+               values_to = "GDPPerCapita") %>% 
+  ggplot(aes(x = continent, y = GDPPerCapita, fill = min_or_max)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  theme(legend.title = element_blank())+
+  scale_fill_discrete(labels = c("Maximum GDP Value", "Minimum GDP Value")) +
+  scale_y_log10("GDP per capita", labels = scales::dollar_format())
+```
+
+![](hw3.0_dplyr-ggplot-pt.2_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+
+
+### Some details of this graph was rather finicky, among some common sites, I stumbled upon (Data Nova)[https://www.datanovia.com/en/], which was a helpful resource for some formatting details.
+
+
+
+```r
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(max_gdp = max(gdpPercap),
+            min_gdp = min(gdpPercap)) %>% 
+  ggplot(aes(continent, fill = max_gdp)) +
+  geom_bar() +
+  theme_minimal()
+```
+
+![](hw3.0_dplyr-ggplot-pt.2_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+
 
 ## X.3 - Discussion:
 
