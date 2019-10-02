@@ -189,8 +189,9 @@ gapminder %>%
 
 ![](hw3.0_dplyr-ggplot-pt.2_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
-
 Some details of this graph was rather finicky, among some common sites, I stumbled upon [Data Nova](https://www.datanovia.com/en/), which was a helpful resource for some formatting details.
+
+Also, something seems off about the log scale here - the values, in addition to the scale, seem to have been transformed. I don't understand why? I thought about removing this plot as it's not necessary for the homework assignment and something seems off, but I figure I may want to refer to this note or return to this problem later, and so left it in. (I hope I don't lose marks for that)
 
 ## 2.3 - Discussion: Max and Min GDP from each Continent
 
