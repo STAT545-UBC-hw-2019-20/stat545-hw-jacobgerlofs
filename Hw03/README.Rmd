@@ -8,5 +8,7 @@ output:
 
 The Hw03 folder contains all files pertaining to Assignment 3 for the STAT545 course.
 
+Assignment 3 can now be viewed in html as a website! Just [click here](https://stat545-ubc-hw-2019-20.github.io/stat545-hw-jacobgerlofs/Hw03/hw3.0_dplyr-ggplot-pt.2.html) to check it out
+
 Click [here](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-jacobgerlofs) to return to the home page of the homework repo
 
