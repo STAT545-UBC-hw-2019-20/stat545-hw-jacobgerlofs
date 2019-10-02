@@ -41,7 +41,7 @@ gapminder
 
 ### Defining 'Low Life Expectancy'
 
-#### To establish thresholds for low and high life expectancy, lets summarise life expectancies of the global population. LifeExp is related to year, therefore it may be misleading to ignore the year in obtaining these values to set our threshold. Using most recent year, for example, will yield the highest possible values. To compensate, we will examine life expactancy around the median year in the data set.
+To establish thresholds for low and high life expectancy, lets summarise life expectancies of the global population. LifeExp is related to year, therefore it may be misleading to ignore the year in obtaining these values to set our threshold. Using most recent year, for example, will yield the highest possible values. To compensate, we will examine life expactancy around the median year in the data set.
 
 
 ```r
@@ -68,7 +68,7 @@ gapminder %>%
 ```
 
 
-#### Average life expactancy appears to be about 61.5 years in the year 1982. Low life expectancy can be defined as any life expectancy one standard deviation below the mean, representing the lower 32% of the population. As a absolute value, this is 50.7 years.
+Average life expactancy appears to be about 61.5 years in the year 1982. Low life expectancy can be defined as any life expectancy one standard deviation below the mean, representing the lower 32% of the population. As a absolute value, this is 50.7 years.
 
 ## 1.1 - Tibble: Number of Countries with Low Life Expectancy per Continent over Time
 
@@ -118,7 +118,7 @@ gapminder %>%
 
 ## 1.3 - Discussion: Declining Countries with Low Life Expectancies over Time
 
-#### Looking at the plot, we can see that the number of countries within each continent with a "low life expectancy", as defined by average life expectancies below 50.7 years, decreases over time. This cannot be said for the Oceania region, as life expectancies are above 50.7 between 1952 and 2007. All countries within Europe and the Americas have a life expectancy above 50.7 by the 1980s, Asia only missing this statistic by a few countries. Africa continues to have coutries with low life expectancies, although the number of countries has been steadily declining.
+Looking at the plot, we can see that the number of countries within each continent with a "low life expectancy", as defined by average life expectancies below 50.7 years, decreases over time. This cannot be said for the Oceania region, as life expectancies are above 50.7 between 1952 and 2007. All countries within Europe and the Americas have a life expectancy above 50.7 by the 1980s, Asia only missing this statistic by a few countries. Africa continues to have coutries with low life expectancies, although the number of countries has been steadily declining.
 
 ------
 
@@ -147,7 +147,7 @@ gapminder %>%
 
 ## 2.2 - Plot: Each Continent's Minimum and Maximum GDP Per Capita, irrelevent of time
 
-### From the way the data is organized in 2.1, it seemed quite difficult to create a tacked bar graph - either that, or I didn't know how, despite research. In order to effectively create the stacked bar graph I wanted to make, I had to pivot the data first
+From the way the data is organized in 2.1, it seemed quite difficult to create a tacked bar graph - either that, or I didn't know how, despite research. In order to effectively create the stacked bar graph I wanted to make, I had to pivot the data first
 
 
 ```r
@@ -168,7 +168,7 @@ gapminder %>%
 
 ![](hw3.0_dplyr-ggplot-pt.2_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
-### It's quite difficult to see the Min GDP values given the graph scale, so I've changed the scale into log base 10.
+It's quite difficult to see the Min GDP values given the graph scale, so I've changed the scale into log base 10.
 
 
 ```r
@@ -190,34 +190,69 @@ gapminder %>%
 ![](hw3.0_dplyr-ggplot-pt.2_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 
-### Some details of this graph was rather finicky, among some common sites, I stumbled upon (Data Nova)[https://www.datanovia.com/en/], which was a helpful resource for some formatting details.
+Some details of this graph was rather finicky, among some common sites, I stumbled upon [Data Nova](https://www.datanovia.com/en/), which was a helpful resource for some formatting details.
 
+## 2.3 - Discussion: Max and Min GDP from each Continent
+
+Given that the max and min continent gdp values were obtained from a singular country from any given year, and these details are not included in this analysis, the results are not particularily valuable. We see that each continent has a country with a very low min gdp, which was likely found around 1952 given the positive relationship between GDP and time. Each continent also has a country with quite a high max GDP as well. The spread in the data is therefore quite large, even making a regular-scale graphed difficult to read and comapare max to min GDPs.
+
+------
+
+# Task 5 - Changes in Life Expectancy in Different Continents: 
+
+## 5.1 - Tibble: Changes in Life Expectancy over time, for each continent
 
 
 ```r
 gapminder %>% 
-  group_by(continent) %>% 
-  summarise(max_gdp = max(gdpPercap),
-            min_gdp = min(gdpPercap)) %>% 
-  ggplot(aes(continent, fill = max_gdp)) +
-  geom_bar() +
+  mutate(inc_life_exp = difference(lifeExp)) %>%
+  drop_na() %>% 
+  group_by(year, continent) %>% 
+  summarise(mean_inc_life_exp = mean(inc_life_exp))
+```
+
+```
+## # A tibble: 60 x 3
+## # Groups:   year [12]
+##     year continent mean_inc_life_exp
+##    <int> <fct>                 <dbl>
+##  1  1952 Africa               -27.2 
+##  2  1952 Americas             -13.0 
+##  3  1952 Asia                 -22.5 
+##  4  1952 Europe                -1.99
+##  5  1952 Oceania               -8.29
+##  6  1957 Africa                 2.13
+##  7  1957 Americas               2.68
+##  8  1957 Asia                   3.00
+##  9  1957 Europe                 2.29
+## 10  1957 Oceania                1.04
+## # … with 50 more rows
+```
+
+
+## 5.2 - Plot: Continental Changes in Life Expectancies across Time
+
+
+```r
+gapminder %>% 
+  mutate(inc_life_exp = difference(lifeExp)) %>%
+  drop_na() %>% 
+  filter(year %in% c("1957":"2002")) %>% #filtering out the first year of the data (1952), as difference scores can't be taken.
+  group_by(year, continent) %>% 
+  summarise(mean_inc_life_exp = mean(inc_life_exp)) %>% 
+  ggplot(aes(year, mean_inc_life_exp, colour = continent)) +
+  geom_point() +
+  geom_line() +
   theme_minimal()
 ```
 
-![](hw3.0_dplyr-ggplot-pt.2_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](hw3.0_dplyr-ggplot-pt.2_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
+The biggest problem I had with this was dealing with the first year of the data (1952), as these values had odd negative values that didn't make sense as there's no difference score that can be calculated from this set. Therefore, data points from 1952 were removed. I'm not sure if this is the best practice or approach, but couldn't figure out a better way. To figure out how to effectively filter, I used this website: https://r4ds.had.co.nz/transform.html#filter-rows-with-filter 
 
-## X.3 - Discussion:
+## 5.3 - Discussion: Continental Changes in Life Expectancies across Time
 
-------
-
-# Task X - blah: 
-
-## X.1 - Tibble: 
-
-## X.2 - Plot:
-
-## X.3 - Discussion:
+Surprisingly, each continent displays a unique pattern of changes in average life expectancies across time. Africa remains relatively stable in its life expectancy growth until the 1990s, where average life expectancy actually drecreases, albiet at a low rate of change after the sudden drop. Europe maintains a relatively steady and modest increase in life expectancy over the last decade. Aside from Africa, it almost appears as though each continent is stabilizing to a very similar rate of life expectancy change. That is, an average increase in life expectancy of about 1.5 years every 5 years from 2000 onwards. Of course, time will tell if this trend holds true. The steady rate of change may indicate economic stability while the convergence of continents may indicate globalization, but this is just a conjecture.
 
 ------
 
