@@ -73,11 +73,29 @@ gapminder %>%
 
 ------
 
-# Task X - blah: 
+# Task 2 - Min & Max GDP Per Capita for each Continent: 
 
-## X.1 - Tibble: 
+## 2.1 - Tibble: Each Continent's Minimum and Maximum GDP Per Capita, irrelevent of time
 
-## X.2 - Plot:
+```{r}
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(max_gdp = max(gdpPercap),
+            min_gdp = min(gdpPercap))
+```
+
+## 2.2 - Plot: Each Continent's Minimum and Maximum GDP Per Capita, irrelevent of time
+
+```{r}
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(max_gdp = max(gdpPercap),
+            min_gdp = min(gdpPercap)) %>% 
+  ggplot(aes(continent, fill = max_gdp)) +
+  geom_bar() +
+  theme_minimal()
+```
+
 
 ## X.3 - Discussion:
 
