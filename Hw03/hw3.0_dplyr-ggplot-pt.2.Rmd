@@ -123,21 +123,11 @@ gapminder %>%
 ```
 
 
-### Some details of this graph was rather finicky, among some common sites, I stumbled upon (Data Nova)[https://www.datanovia.com/en/], which was a helpful resource for some formatting details.
-
-
-```{r}
-gapminder %>% 
-  group_by(continent) %>% 
-  summarise(max_gdp = max(gdpPercap),
-            min_gdp = min(gdpPercap)) %>% 
-  ggplot(aes(continent, fill = max_gdp)) +
-  geom_bar() +
-  theme_minimal()
-```
-
+#### Some details of this graph was rather finicky, among some common sites, I stumbled upon (Data Nova)[https://www.datanovia.com/en/], which was a helpful resource for some formatting details.
 
 ## X.3 - Discussion:
+
+#### Given that the max and min continent gdp values were obtained from a singular country from any given year, and these details are not included in this analysis, the results are not particularily valuable. We see that each continent has a country with a very low min gdp, which was likely found around 1952 given the positive relationship between GDP and time. Each continent also has a country with quite a high max GDP as well. The spread in the data is therefore quite large, even making a regular-scale graphed difficult to read and comapare max to min GDPs.
 
 ------
 
