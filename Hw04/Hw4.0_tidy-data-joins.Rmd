@@ -76,6 +76,7 @@ gapminder %>%
   select(country, year, lifeExp, gdpPercap) %>% 
   pivot_wider(id_cols = year,
               names_from = country,
+              names_sep = "--",
               values_from = c(lifeExp, gdpPercap))
 ```
 
