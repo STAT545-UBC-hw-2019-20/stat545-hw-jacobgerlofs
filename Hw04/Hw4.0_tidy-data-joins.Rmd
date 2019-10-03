@@ -80,3 +80,19 @@ gapminder %>%
               values_from = c(lifeExp, gdpPercap))
 ```
 
+## 2.2: Pivoting Data Back to Original Format
+
+```{r}
+gapminder %>% 
+  filter(country == "China" | country == "Taiwan") %>% 
+  select(country, year, lifeExp, gdpPercap) %>% 
+  pivot_wider(id_cols = year,
+              names_from = country,
+              names_sep = "--",
+              values_from = c(lifeExp, gdpPercap)) %>% 
+  pivot_longer(cols = -year,
+               names_sep = "--",
+               names_to = c("country", ".value"))
+```
+
+
