@@ -47,14 +47,13 @@ gapminder %>%
   pivot_wider(id_cols = year,
               names_from = country,
               values_from = lifeExp) %>% 
-  ggplot(aes(year, China)) +
-  geom_line(aes()) +
-  geom_point() +
+  ggplot(aes(Taiwan, China)) +
+  geom_point(colour = "dark red") +
   theme_minimal()
 ```
 
 ## 1.3: Pivoting Longer to Return Original Organization
-
+ 
 ```{r}
 gapminder %>% 
   filter(country == "China" | country == "Taiwan") %>% 
