@@ -29,7 +29,7 @@ suppressPackageStartupMessages(library(tsibble))
 
 ```{r}
 gapminder %>% 
-  filter(country == "Austria" | country == "Belgium") %>% 
+  filter(country == "China" | country == "Taiwan") %>% 
   select(country, year, lifeExp) %>% 
   pivot_wider(id_cols = year,
               names_from = country,
@@ -40,13 +40,13 @@ gapminder %>%
 
 ```{r}
 gapminder %>% 
-  filter(country == "Austria" | country == "Belgium") %>% 
+  filter(country == "China" | country == "Taiwan") %>% 
   select(country, year, lifeExp) %>% 
   pivot_wider(id_cols = year,
               names_from = country,
               values_from = lifeExp) %>% 
-  ggplot(aes(year, lifeExp, fill = country)) +
-  geom_line() +
+  ggplot(aes(year, China)) +
+  geom_line(aes()) +
   geom_point() +
   theme_minimal()
 ```
