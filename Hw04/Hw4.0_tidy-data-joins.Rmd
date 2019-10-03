@@ -19,7 +19,7 @@ suppressPackageStartupMessages(library(scales))
 suppressPackageStartupMessages(library(tsibble))
 ```
 
-# Univariate Option 1: Comparing Life Expectancies over Time
+# Part 1 - Univariate Option 1: Comparing Life Expectancies over Time
 
 Full dataframe for reference...
 
@@ -66,5 +66,16 @@ gapminder %>%
                values_to = "lifeExp")
 ```
 
-# Multivariate Option X: 
+# Part 2 - Multivariate Option 1: Life Expectancy and GDP per Capita over Time
+
+## 2.1: Pivoting Data to the New Layout
+
+```{r}
+gapminder %>% 
+  filter(country == "China" | country == "Taiwan") %>% 
+  select(country, year, lifeExp, gdpPercap) %>% 
+  pivot_wider(id_cols = year,
+              names_from = country,
+              values_from = c(lifeExp, gdpPercap))
+```
 
