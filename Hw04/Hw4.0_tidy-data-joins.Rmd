@@ -123,3 +123,12 @@ guest %>%
 
 I had some trouble getting the join to reconcile groups of parties in the email list and the lis of names in the guest list. To fix this, I first re-arranged the email list into individual names and joined the names column with the new, longer, guests column.
 
+## 3.2 - Identifying Non-Guestlist Emails
+
+```{r}
+email_longer %>% 
+  anti_join(guest, c("guest" = "name"))
+```
+
+
+
