@@ -92,7 +92,9 @@ gapminder %>%
               values_from = c(lifeExp, gdpPercap)) %>% 
   pivot_longer(cols = -year,
                names_sep = "--",
-               names_to = c("country", ".value"))
+               names_to = c(".value", "country"))
 ```
+
+Note to self: the order arguments are entered into names_to is important - reversing the order gives funky results. I'm guessing this is due to "lifeExp" and "gdpPercap" (which are the values I'm retaining into columns) being the first component in the column header, and the countries being the second component.
 
 
