@@ -19,7 +19,7 @@ suppressPackageStartupMessages(library(scales))
 suppressPackageStartupMessages(library(tsibble))
 ```
 
-# Univariate Option 1: Isolating Life Expectancies over Time
+# Univariate Option 1: Comparing Life Expectancies over Time
 
 Full dataframe for reference...
 
@@ -66,4 +66,6 @@ gapminder %>%
                names_to = "country",
                values_to = "lifeExp")
 ```
+
+# Multivariate Option X: 
 
