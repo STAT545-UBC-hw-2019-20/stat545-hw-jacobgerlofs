@@ -21,8 +21,10 @@ suppressPackageStartupMessages(library(tsibble))
 
 # Univariate Option 1: Isolating Life Expectancies over Time
 
-```{r}
+Full dataframe for reference...
 
+```{r}
+gapminder
 ```
 
 ## 1.1: Pivoting Wider to comapres two countries
