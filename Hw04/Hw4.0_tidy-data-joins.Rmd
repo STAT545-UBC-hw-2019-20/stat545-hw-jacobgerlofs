@@ -97,4 +97,29 @@ gapminder %>%
 
 Note to self: the order arguments are entered into names_to is important - reversing the order gives funky results. I'm guessing this is due to "lifeExp" and "gdpPercap" (which are the values I'm retaining into columns) being the first component in the column header, and the countries being the second component.
 
+# Part 3 - Table Joins
+
+```{r}
+guest <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/attend.csv")
+email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/emails.csv")
+```
+
+
+## 3.1 - Adding Email Addresses to the Guestlist
+
+First, lets exmamine our data files to help with visualizing the code.
+
+```{r}
+guest
+email
+```
+
+```{r}
+email_longer <- email %>% 
+  separate_rows(guest, sep = ", ") #convert the email list from groups of guests to individual guests
+guest %>% 
+  left_join(email_longer, c("name" = "guest"))
+```
+
+I had some trouble getting the join to reconcile groups of parties in the email list and the lis of names in the guest list. To fix this, I first re-arranged the email list into individual names and joined the names column with the new, longer, guests column.
 
