@@ -19,3 +19,26 @@ suppressPackageStartupMessages(library(scales))
 suppressPackageStartupMessages(library(tsibble))
 ```
 
+# Univariate Option 1: Isolating Life Expectancies over Time
+
+```{r}
+
+```
+
+## 1.1: Pivoting Wider to comapres two countries
+
+```{r}
+gapminder %>% 
+  filter(country == "Austria" | country == "Belgium") %>% 
+  select(country, year, lifeExp) %>% 
+  pivot_wider(id_cols = year,
+              names_from = country,
+              values_from = lifeExp)
+```
+
+## 1.2: Plotting with the New Data Layout
+
+```{r}
+
+```
+
