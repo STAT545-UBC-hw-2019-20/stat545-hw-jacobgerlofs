@@ -31,11 +31,11 @@ gapminder
 
 ```{r}
 gapminder %>% 
-  filter(country == "China" | country == "Taiwan") %>% 
-  select(country, year, lifeExp) %>% 
-  pivot_wider(id_cols = year,
-              names_from = country,
-              values_from = lifeExp)
+  filter(country == "China" | country == "Taiwan") %>% #isolating counries of interest
+  select(country, year, lifeExp) %>% #isolating variables of interest
+  pivot_wider(id_cols = year, #pivot, keeping year column
+              names_from = country, #pulling new columns from country column
+              values_from = lifeExp) #pulling values from lifeExp column
 ```
 
 ## 1.2: Plotting with the New Data Layout
@@ -47,8 +47,8 @@ gapminder %>%
   pivot_wider(id_cols = year,
               names_from = country,
               values_from = lifeExp) %>% 
-  ggplot(aes(Taiwan, China)) +
-  geom_point(colour = "dark red") +
+  ggplot(aes(Taiwan, China)) + #plotting Taiwan against China
+  geom_point(colour = "dark red") + #using point geom with dark red colour
   theme_minimal()
 ```
 
@@ -61,9 +61,9 @@ gapminder %>%
   pivot_wider(id_cols = year,
               names_from = country,
               values_from = lifeExp) %>% 
-  pivot_longer(cols = c(China, Taiwan),
-               names_to = "country",
-               values_to = "lifeExp")
+  pivot_longer(cols = c(China, Taiwan), #compressing our country columns
+               names_to = "country", #creating new country column for the two countries
+               values_to = "lifeExp") #directing values to new lifeExp column
 ```
 
 # Part 2 - Multivariate Option 1: Life Expectancy and GDP per Capita over Time
@@ -74,10 +74,10 @@ gapminder %>%
 gapminder %>% 
   filter(country == "China" | country == "Taiwan") %>% 
   select(country, year, lifeExp, gdpPercap) %>% 
-  pivot_wider(id_cols = year,
-              names_from = country,
-              names_sep = "--",
-              values_from = c(lifeExp, gdpPercap))
+  pivot_wider(id_cols = year, #keeping year column
+              names_from = country, #pulling values from country column for new columns
+              names_sep = "--", #choosing separation the column components
+              values_from = c(lifeExp, gdpPercap)) #pulling values from our measures for new columns
 ```
 
 ## 2.2: Pivoting Data Back to Original Format
@@ -90,9 +90,9 @@ gapminder %>%
               names_from = country,
               names_sep = "--",
               values_from = c(lifeExp, gdpPercap)) %>% 
-  pivot_longer(cols = -year,
-               names_sep = "--",
-               names_to = c(".value", "country"))
+  pivot_longer(cols = -year, #selecting all columns except year to compress
+               names_sep = "--", #identifying what separates the components embedded in the columns
+               names_to = c(".value", "country")) #directing new columns and their content
 ```
 
 Note to self: the order arguments are entered into names_to is important - reversing the order gives funky results. I'm guessing this is due to "lifeExp" and "gdpPercap" (which are the values I'm retaining into columns) being the first component in the column header, and the countries being the second component.
@@ -118,7 +118,7 @@ email
 email_longer <- email %>% 
   separate_rows(guest, sep = ", ") #convert the email list from groups of guests to individual guests
 guest %>% 
-  left_join(email_longer, c("name" = "guest"))
+  left_join(email_longer, c("name" = "guest")) #join into the guest table using guest/name as common reference
 ```
 
 I had some trouble getting the join to reconcile groups of parties in the email list and the lis of names in the guest list. To fix this, I first re-arranged the email list into individual names and joined the names column with the new, longer, guests column.
@@ -127,8 +127,14 @@ I had some trouble getting the join to reconcile groups of parties in the email 
 
 ```{r}
 email_longer %>% 
-  anti_join(guest, c("guest" = "name"))
+  anti_join(guest, c("guest" = "name")) #removing shared rows between guest/name column from email table
 ```
 
+## 3.3 - Making a Full Guestlist and Email List
+
+```{r}
+guest %>% 
+  full_join(email_longer, c("name" = "guest")) #completely joining tables using name/guest columns as reference
+```
 
 
