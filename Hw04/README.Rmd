@@ -1,6 +1,8 @@
 ---
 title: "README"
-output: html_document
+output: 
+  html_document:
+    keep_md: yes
 ---
 
 # STAT545 Homework Assignment #4 Folder
