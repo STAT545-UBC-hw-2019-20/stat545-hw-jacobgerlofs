@@ -26,5 +26,17 @@ Broadly speaking, using the 'here' package is a more robust way of managing your
 
 # Exercise 2: Factor Management
 
+Let's first take a look at our full gapminder data set for context in this exercise
 
+```{r}
+datatable(gapminder)
+```
 
+Now Let's Examine what categorical variables in our dataframe are factors
+
+```{r}
+class(gapminder$country)
+class(gapminder$continent)
+```
+
+Therefore, both Country and Continent are factors. 
