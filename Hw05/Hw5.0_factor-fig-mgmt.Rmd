@@ -89,13 +89,14 @@ gapminder %>%
 
 # Exercise 3: File Input / Output
 
+To reduce the size of the data we're working with, I chose to use Life Expectancy. I was born in 1997 in North America, so let's examine Life Expectancies in the Americas is the year 1997. First we'll filter the data set, then we'll write this into a 
 
 
 ```{r}
-(gapminder_Amer <- gapminder %>%
-  filter(continent == "Americas", year == "1997") %>%
+(gapminder_Amer <- gapminder %>% 
+   filter(continent == "Americas", year == "1997") %>%
    select(country, lifeExp) %>%
-  group_by(country)) %>%
+   group_by(country)) %>%
   datatable()
 
 write_csv(gapminder_Amer, here::here("Hw05", "lifeExpAmer.csv"))
@@ -105,8 +106,9 @@ lifeExpAmer %>%
   ggplot() +
   geom_col(aes(fct_reorder(country, lifeExp, max), lifeExp)) +
   scale_y_continuous("Life Expectancy") +
+  coord_flip() +
   xlab("Country") +
-  ggtitle("Life Expectancy of Various in North and South American Countries in 1997 ") +
+  ggtitle("Life Expectancy of North and South American Countries in 1997 ") +
   theme_minimal()
 ```
 
