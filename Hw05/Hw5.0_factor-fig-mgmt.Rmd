@@ -19,7 +19,9 @@ suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(scales))
 suppressPackageStartupMessages(library(DT))
 suppressPackageStartupMessages(library(forcats))
+suppressPackageStartupMessages(library(here))
 suppressPackageStartupMessages(library(kableExtra))
+suppressPackageStartupMessages(library(gridExtra))
 ```
 
 # Exercise 1: The Value of 'here' Package - Superior File and Path Management
@@ -89,15 +91,15 @@ gapminder %>%
 
 # Exercise 3: File Input / Output
 
-To reduce the size of the data we're working with, I chose to use Life Expectancy. I was born in 1997 in North America, so let's examine Life Expectancies in the Americas is the year 1997. First we'll filter the data set, then we'll write this into a 
-
+To reduce the size of the data we're working with, I chose to use Life Expectancy. I was born in 1997 in North America, so let's examine Life Expectancies in the Americas is the year 1997. First we'll filter the data set, then we'll write this into its own .csv file, then read this dataframe, and finally generate two plots: one from the original gapminder dataframe and one from the new dataframe, in order to evaluate the input/output process.
 
 ```{r}
 (gapminder_Amer <- gapminder %>% 
    filter(continent == "Americas", year == "1997") %>%
    select(country, lifeExp) %>%
-   group_by(country)) %>%
-  datatable()
+   group_by(country))
+
+datatable(gapminder_Amer)
 
 write_csv(gapminder_Amer, here::here("Hw05", "lifeExpAmer.csv"))
 (lifeExpAmer <- read_csv(here::here("Hw05", "lifeExpAmer.csv")))
@@ -110,5 +112,56 @@ lifeExpAmer %>%
   xlab("Country") +
   ggtitle("Life Expectancy of North and South American Countries in 1997 ") +
   theme_minimal()
+
+compare_gapminder <- gapminder %>% 
+  filter(continent == "Americas", year == "1997")
+  
+compare_gapminder %>% 
+  ggplot() +
+  geom_col(aes(fct_reorder(country, lifeExp, max), lifeExp)) +
+  scale_y_continuous("Life Expectancy") +
+  coord_flip() +
+  xlab("Country") +
+  ggtitle("Life Expectancy of North and South American Countries in 1997") +
+  theme_minimal()
 ```
+
+The table shows us the filtered data we're working with. The first plot shows the filtered dataframe after it's been written and then read. The second shows us what that same dataframe looks like after filtering from the original dataset without any writing/reading. We can see that both plots are identical, which is a good indication the writing/reading process was successful.
+
+# Exercise 4: Visualization Design
+
+In my Assingment 2, I was exploring the iris dataset and looking at a crude measure of flower component surface area by calculating length x width. I compared three species of flower petal surface areas using a box plot. I think the design of this plot could be re-deigned to better show the raw data. Check out the original figure below, along with the alternate version...
+
+```{r}
+library(datasets)
+
+fig1 <- iris %>%
+  ggplot() +aes(Species, iris$Petal.Width*iris$Petal.Length, fill = Species) + geom_boxplot() + ylab("Sepal Surface Area")+ scale_fill_brewer(palette="RdBu") + theme_minimal()
+
+fig2 <- iris %>%
+  ggplot() +
+  geom_point (aes(alpha = .6, Petal.Width, Petal.Length, color = Species)) +
+  xlab("Pedal Width") +
+  ylab("Petal Length") +
+  theme_minimal() +
+  ggtitle("Petal Surface Area of Various Flower Species")
+
+saved_figure <- grid.arrange(fig1, fig2, nrow = 1, ncol = 2, widths = c(1/2, 1/2))
+```
+
+As you can see in the left figure, the boxplot hides the data points. Further, due to the small petal size of the Setosa plant, it's squished and difficult to interpret values for this species. One solution could be to add geom_point and jitter the points. Alternatively, I realize that surface area is a function of length and width, which can be plotted literally against eachother instead of calculating surface area. Plotted as a geom_point plot, this acts as a sort of jittering of points, so all data points can be seen. A reduced alpha transparency helps here as well. You can still clearly see which plants have the largest surface area petals (i.e. the top right corner), but get to see the raw data and better understand the nature of these conclusions. For example, 2 species that have similar surface areas yet relativley long or relatively wide petals will be found collected at the top or right sides of the plot, respectively. My only concern with this new graph is the ability to compare surface areas directly against two species - in the example just given, two surface areas may be the same but derived from different legnth x width dimensions, and this could be difficult to see. I also thought the surface area component of the whole data may not be a intuitive, as the axis combination is not entirely conventional, but this can partially be mitigated via the title, which is clear in stating surface area is the main take-away. Notably, no specifics on the unit of measure if provided in the data, so I can't add that to the axis labels.
+
+Also, I can't seem to get these two figures un-squished! the grid.arrange work well to get them side-by-side, but I'm still working on getting them to have appropriate widths. In sasving the figure and reading it again as a .png, it seems to look better.
+
+
+# Exercise 5: Writing Figures to Files
+
+Here we will save the previouss figure as a .png file, and then read this new file back into our script.
+
+```{r}
+ggsave("saved_figure.png", saved_figure, width = 15, height = 6, dpi = 320)
+```
+
+![Saved Figure](saved_figure.png)
+
 
