@@ -18,6 +18,8 @@ suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(scales))
 suppressPackageStartupMessages(library(DT))
+suppressPackageStartupMessages(library(forcats))
+suppressPackageStartupMessages(library(kableExtra))
 ```
 
 # Exercise 1: The Value of 'here' Package - Superior File and Path Management
@@ -40,3 +42,71 @@ class(gapminder$continent)
 ```
 
 Therefore, both Country and Continent are factors. 
+
+## Dropping Oceania
+
+Before dropping Oceania, let's check how many oberervations we have so we can later verify their removal. This removal will happen in a new gapminder dataframe, so we'll make that now too and work with this new dataframe
+
+```{r}
+new_gapminder <- gapminder
+levels(new_gapminder$continent)
+nlevels(new_gapminder$continent)
+```
+
+Lit fam, we have 5 continents. Let's drop Oceania.
+
+```{r}
+keep_continents <- c("Americas", "Africa", "Asia", "Europe")
+
+target_factors <- new_gapminder %>% 
+  filter(continent %in% keep_continents)
+
+dropped_gapminder <- target_factors %>% 
+  droplevels()
+
+levels(dropped_gapminder$continent)
+nlevels(dropped_gapminder$continent)
+```
+
+## Re-ordering by Factors: Continental Min GDP
+
+Let's organize our factors - in this case continent - by something other than the alphabet. How about minimum GDP per capita? First we'll find the min GDP, and then we'll do some sorting.
+
+```{r}
+gapminder %>% 
+  select(continent, gdpPercap) %>%
+  group_by(continent) %>%
+  summarise(minGDP = min(gdpPercap)) %>%
+  ggplot() +
+  geom_col(aes(fct_reorder(continent, minGDP, max), minGDP, fill = continent)) +
+  xlab("Continent") +
+  ggtitle("Continental Minimum GDP per capita") +
+  scale_y_continuous("GDP per capita", labels = scales::dollar_format()) +
+  theme_minimal() +
+  scale_fill_brewer() +
+  theme(legend.position = "none")
+```
+
+# Exercise 3: File Input / Output
+
+
+
+```{r}
+(gapminder_Amer <- gapminder %>%
+  filter(continent == "Americas", year == "1997") %>%
+   select(country, lifeExp) %>%
+  group_by(country)) %>%
+  datatable()
+
+write_csv(gapminder_Amer, here::here("Hw05", "lifeExpAmer.csv"))
+(lifeExpAmer <- read_csv(here::here("Hw05", "lifeExpAmer.csv")))
+
+lifeExpAmer %>%
+  ggplot() +
+  geom_col(aes(fct_reorder(country, lifeExp, max), lifeExp)) +
+  scale_y_continuous("Life Expectancy") +
+  xlab("Country") +
+  ggtitle("Life Expectancy of Various in North and South American Countries in 1997 ") +
+  theme_minimal()
+```
+
